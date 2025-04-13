@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista con Copia Numero</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .item {
+      margin: 10px 0;
+    }
+    button {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista di nomi con numeri</h1>
+  <div id="lista"></div>
+
+  <script>
+    const nomi = ["Luca", "Marco", "Giulia", "Anna", "Francesco", "Sara", "Davide", "Elena", "Giorgio", "Martina"];
+
+    const lista = document.getElementById('lista');
+
+    nomi.forEach((nome, index) => {
+      const numero = Math.floor(Math.random() * 1000); // numero casuale tra 0 e 999
+
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'item';
+
+      const nomeSpan = document.createElement('span');
+      nomeSpan.textContent = `${nome}: `;
+
+      const numeroSpan = document.createElement('span');
+      numeroSpan.textContent = numero;
+      numeroSpan.id = `numero-${index}`;
+
+      const button = document.createElement('button');
+      button.textContent = 'Copia numero';
+      button.onclick = () => {
+        const textToCopy = numero.toString();
+        navigator.clipboard.writeText(textToCopy)
+          .then(() => alert(`Numero ${textToCopy} copiato negli appunti!`))
+          .catch(err => alert('Errore nella copia: ' + err));
+      };
+
+      itemDiv.appendChild(nomeSpan);
+      itemDiv.appendChild(numeroSpan);
+      itemDiv.appendChild(button);
+
+      lista.appendChild(itemDiv);
+    });
+  </script>
+</body>
+</html>
